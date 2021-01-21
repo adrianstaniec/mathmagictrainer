@@ -32,8 +32,12 @@ def format_question(a, b, op):
 def choose_level_generator(levels):
     n_levels = len(levels)
     level = 0
+    print(f"Available levels: ")
+    for i, level in enumerate(levels):
+        level_name = level.__name__.replace('_',' ').ljust(36)
+        print(f"  {i+1}: {level_name}  {level.__doc__}")
     while True:
-        print(f"Choose level (1-{n_levels}): ", end="")
+        print(f"Choose level: ", end="")
         sys.stdout.flush()
         level = getch.getch()
         if level.isnumeric():
@@ -45,6 +49,7 @@ def choose_level_generator(levels):
 
 
 def wait_for_correct_answer(correct_answer):
+    correct_answer = str(correct_answer)
     user_answer = []
     while "".join(user_answer) != correct_answer:
         char = getch.getch()
